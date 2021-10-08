@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+
+
+
+<h2>Kontrol Paneli</h2>
+<hr>
+<a href="{% url 'article:addArticle' %}" class="btn btn-warning" type="button">Makale Ekle</a>
+<br> <br>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Başlık</th>
+        <th scope="col">Yazar</th>
+        <th scope="col">Tarih</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+        <tr>
+            <th scope="row">{{article.id}}</th>
+            <td><a href="{% url 'article:detail' article.id %}">{{article.title}}</a></td>
+            <td>{{article.author}}</td>
+            <td>{{article.created_date}}</td>
+            <th scope="col"><a href="{% url 'article:updateArticle' article.id %}" class="btn btn-info">Düzenle</a></th>
+            <th scope="col"><a href="{% url 'article:deleteArticle' article.id %}" class="btn btn-danger">Sil</a></th>
+        </tr>        
+        {% endfor %}
+
+
+    </tbody>
+  </table>
+
+{% endblock body %}

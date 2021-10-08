@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading -->
+
+    <h2 class="my-4">Makaleler</h2>
+    
+    <form>
+        {% csrf_token %}
+    <div class="input-group mb-3" style="float:right; width:fit-content;margin-top:-60px;">
+        
+        <input style="width: fit-content;" type="text" class="form-control" placeholder="Ara" name="keyword">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">Ara</button>
+        </div>
+    </div>   
+    </form>
+    <hr>
+    
+
+    {% if articles %}
+    
+
+
+    {% for article in articles %}
+    <!-- Project One -->
+    
+    <div class="row">
+        {% if article.image.url != "/media/1" %}
+            <div class="col-md-7">
+                <a href="{% url 'article:detail' article.id %}">
+                <img class="img-fluid rounded mb-3 mb-md-0" src="{{article.image.url}}" alt="">
+                </a>
+            </div>
+
+            <div class="col-md-5">
+                <h3>{{article.title}}</h3>
+                <p>{{article.content|truncatechars_html:500|safe}}</p>
+                <small>{{article.author}},</small> <br>
+                <a class="btn btn-secondary btn-sm" href="{% url 'article:detail' article.id %}">Görüntüle</a> 
+                <!--Görüntüle Butonları kaldırılma lı hrefli başlıklar atılmalı mı? -->
+            </div>
+        
+        {% else %}
+            <div>
+                <h3>{{article.title}}</h3>
+                <p>{{article.content|truncatechars_html:1000|safe}}</p>
+                <small>{{article.author}},</small> <br>
+                <a class="btn btn-secondary btn-sm" href="{% url 'article:detail' article.id %}">Görüntüle</a>
+            </div>
+        {% endif %}
+
+      
+      
+    </div>
+    <hr>
+    <!-- /.row -->    
+    {% endfor %}
+
+    {% else %}
+    <div class="alert alert-danger">
+        Makale Bulunamadı
+    </div>
+    {% endif %}
+
+
+
+
+
+  </div>
+  <!-- /.container -->
+
+{% endblock body %}
+
+

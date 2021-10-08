@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h2>Profil</h2>
+<hr>
+<!-- <p><small>Kullanıcı Adı:</small>  {{request.user.username}}</p>
+{% if user_info.profile_image.url %}
+    <img class="img-fluid rounded mb-3 mb-md-0" src="{{user_info.profile_image.url}}" style="max-width: 100px;" alt="">
+{% else %}
+    <img class="img-fluid rounded mb-3 mb-md-0" src="https://avatarfiles.alphacoders.com/248/thumb-1920-248375.jpg" style="max-width: 100px;" alt="">
+{% endif %} -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="card-title mb-4">
+                        <div class="d-flex justify-content-start">
+                            <div class="image-container">
+                                {% if user_info.profile_image.url %}
+                                <img src="{{user_info.profile_image.url}}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                {% else %}
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                {% endif %}
+                                
+                                
+                                    
+                                
+                            </div>
+                            <div class="userData ml-3">
+                                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">{{request.user.username}}</h2> <!--herkesin görebileceği profil yapılıp bağlanacak! -->
+                                <h6 class="d-block"><a href="javascript:void(0)">{{articles_len}}</a> Makale</h6>
+                                <h6 class="d-block"><a href="javascript:void(0)">{{comments_len}}</a> Yorum</h6>
+                                <br>
+                                <a href="{% url 'user:editProfile' %}" style="float: right;margin-top:auto" class="btn btn-secondary btn-sm">Profili Düzenle</a>
+                            </div>
+                            
+                            <div class="ml-auto">
+                                <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Bilgiler</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Bağlantılar</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content ml-1" id="myTabContent">
+                                <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                    
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Ad Soyad</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+
+                                            {% if user_info.full_name %}
+                                            {{user_info.full_name}}
+                                            {% else %}
+                                            &ltBelirtilmemiş&gt
+                                            {% endif %}
+                                            
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Kullanıcı Adı</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            {{request.user.username}}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">e-Posta Adresi</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            {% if user_info.email_address %}
+                                            {{user_info.email_address}}
+                                            {% else %}
+                                            &ltBelirtilmemiş&gt
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Doğum Tarihi</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            {% if user_info.birth_date %}
+                                            {{user_info.birth_date}}
+                                            {% else %}
+                                            &ltBelirtilmemiş&gt
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    {% comment %} <hr />
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Something</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            Something
+                                        </div>
+                                    </div>
+                                    <hr /> {% endcomment %}
+
+                                </div>
+                                <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                                    Facebook, Google, Twitter Yakında..
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock body %}

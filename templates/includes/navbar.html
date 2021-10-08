@@ -1,0 +1,61 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <a class="navbar-brand" href="/">RazeBlog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'about' %}">Hakkımızda<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'article:articles' %}">Makaleler<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin Paneli<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+
+
+        
+        {% if request.user.is_authenticated %}
+        <li class="nav-item active">
+          {% load static %}
+            
+
+            
+
+            
+              {% if user_info.profile_image %}
+                <a href="/user/profile"><img src="{{user_info.profile_image.url}}" class="rounded-circle z-depth-2" alt="avatar" width="40" height="40"></a>
+              {% else %}
+                <a href="/user/profile"><img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" class="rounded-circle z-depth-2" alt="avatar" width="40" height="40"></a>
+              {% endif %}
+
+
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'article:dashboard' %}">Kontrol Paneli<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'user:logoutUser' %}">Çıkış Yap<span class="sr-only">(current)</span></a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'user:registerUser' %}">Kayıt Ol<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'user:loginUser' %}">Giriş Yap<span class="sr-only">(current)</span></a>
+        </li>
+
+        {% endif %}
+
+                
+
+
+
+      </ul>
+    </div>
+  </nav>
